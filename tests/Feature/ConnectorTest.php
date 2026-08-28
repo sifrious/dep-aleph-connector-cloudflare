@@ -164,3 +164,23 @@ it('produces the same accepted count when the same account is read twice', funct
     expect($first->successful)->toBeTrue()
         ->and($second->records)->toBe($first->records);
 });
+
+it('runs the whole inventory from fixtures with no network and no credentials', function (): void {
+    Http::fake();
+
+    $connector = new CloudflareConnector(
+        app(Sifrious\Aleph\Envelope\EnvelopeSubmitter::class),
+        new Normalizer,
+        null,
+        Sifrious\CloudflareConnector\Testing\FixtureZoneReader::fixtureAccount(),
+    );
+
+    $result = $connector->backfill(cfRequest());
+
+    expect($result->successful)->toBeTrue()
+        ->and($result->complete)->toBeTrue()
+        ->and($result->records)->toBe(6)
+        ->and($result->metadata['tls_mode_unobserved'])->toBe(['mary.is']);
+
+    Http::assertNothingSent();
+});

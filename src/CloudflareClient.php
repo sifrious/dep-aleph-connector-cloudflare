@@ -8,6 +8,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Sifrious\CloudflareConnector\Contracts\Sleeper;
+use Sifrious\CloudflareConnector\Contracts\ZoneReader;
 
 /**
  * Read-only Cloudflare REST v4 reader.
@@ -20,7 +21,7 @@ use Sifrious\CloudflareConnector\Contracts\Sleeper;
  * that builds a POST, PUT, PATCH or DELETE, so a scoped read token is
  * sufficient and a global key is never exercised beyond reading.
  */
-final class CloudflareClient
+final class CloudflareClient implements ZoneReader
 {
     public const BASE = 'https://api.cloudflare.com/client/v4';
 

@@ -23,6 +23,7 @@ use Sifrious\Aleph\Envelope\EnvelopeSubmitter;
 use Sifrious\Aleph\Envelope\ExtensionMetadata;
 use Sifrious\Aleph\Envelope\ObservationEnvelope;
 use Sifrious\Aleph\Envelope\Provenance;
+use Sifrious\CloudflareConnector\Contracts\ZoneReader;
 use Throwable;
 
 /**
@@ -47,7 +48,7 @@ final class CloudflareConnector implements Backfills, ChecksHealth, Connector, D
         private readonly EnvelopeSubmitter $submitter,
         private readonly Normalizer $normalizer = new Normalizer,
         private readonly ?ConnectorInstallations $installations = null,
-        private readonly ?CloudflareClient $client = null,
+        private readonly ?ZoneReader $reader = null,
     ) {}
 
     public function id(): string
@@ -112,7 +113,7 @@ final class CloudflareConnector implements Backfills, ChecksHealth, Connector, D
     {
         try {
             $credentials = $this->credentials($request);
-            $client = $this->client ?? new CloudflareClient($credentials);
+            $client = $this->reader ?? new CloudflareClient($credentials);
             $zones = $client->zones();
         } catch (CloudflareError $error) {
             return OperationResult::failed($error->getMessage(), [
