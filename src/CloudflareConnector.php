@@ -128,6 +128,9 @@ final class CloudflareConnector implements Backfills, ChecksHealth, Connector, D
         $batch = max(1, (int) $request->parameter('batch', self::DEFAULT_BATCH));
         $includeRecords = (bool) $request->parameter('include_records', true);
         $includeTls = (bool) $request->parameter('include_tls', true);
+        /* See the Namecheap connector: Funes has no list API yet. Opt-in. */
+        $returnObservations = (bool) $request->parameter('return_observations', false);
+        $observations = ['zones' => [], 'records' => []];
         $installation = (string) $request->parameter('installation', 'unconfigured');
         $capturedAt = Date::now()->toDateTimeImmutable();
 
@@ -158,6 +161,10 @@ final class CloudflareConnector implements Backfills, ChecksHealth, Connector, D
 
             $accepted++;
 
+            if ($returnObservations) {
+                $observations['zones'][] = $normalizedZone;
+            }
+
             if (! $includeRecords || $zoneId === null) {
                 continue;
             }
@@ -184,6 +191,10 @@ final class CloudflareConnector implements Backfills, ChecksHealth, Connector, D
                 }
 
                 $accepted++;
+
+                if ($returnObservations) {
+                    $observations['records'][] = $normalizedRecord;
+                }
             }
         }
 
@@ -194,6 +205,10 @@ final class CloudflareConnector implements Backfills, ChecksHealth, Connector, D
             'tls_mode_unobserved' => $tlsUnobserved,
             'normalizer_version' => Normalizer::VERSION,
         ];
+
+        if ($returnObservations) {
+            $metadata['observations'] = $observations;
+        }
 
         return $nextOffset < count($zones)
             ? OperationResult::partial($accepted, (string) $nextOffset, $metadata)
