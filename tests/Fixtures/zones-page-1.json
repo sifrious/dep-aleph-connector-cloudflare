@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "id": "zone-tryingg",
+      "name": "tryin.gg",
+      "status": "active",
+      "paused": false,
+      "type": "full",
+      "name_servers": ["dana.ns.cloudflare.com", "chip.ns.cloudflare.com"],
+      "original_registrar": "namecheap, inc. (id: 1068)",
+      "account": { "id": "acct-1", "name": "sifrious" }
+    },
+    {
+      "id": "zone-heynamatic",
+      "name": "heynamatic.com",
+      "status": "pending",
+      "paused": false,
+      "type": "full",
+      "name_servers": ["chip.ns.cloudflare.com", "dana.ns.cloudflare.com"],
+      "original_registrar": null,
+      "account": { "id": "acct-1", "name": "sifrious" }
+    }
+  ],
+  "result_info": { "page": 1, "per_page": 2, "total_pages": 2, "count": 2, "total_count": 3 }
+}

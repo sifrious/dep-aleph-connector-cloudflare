@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result": [
+    {
+      "id": "rec-apex",
+      "type": "A",
+      "name": "tryin.gg",
+      "content": "203.0.113.10",
+      "ttl": 1,
+      "proxied": true,
+      "proxiable": true
+    },
+    {
+      "id": "rec-www",
+      "type": "CNAME",
+      "name": "www.tryin.gg",
+      "content": "tryin.gg",
+      "ttl": 3600,
+      "proxied": true,
+      "proxiable": true
+    },
+    {
+      "id": "rec-mx",
+      "type": "MX",
+      "name": "tryin.gg",
+      "content": "mail.tryin.gg",
+      "ttl": 3600,
+      "priority": 10,
+      "proxied": false,
+      "proxiable": false
+    }
+  ],
+  "result_info": { "page": 1, "per_page": 100, "total_pages": 1, "count": 3, "total_count": 3 }
+}
