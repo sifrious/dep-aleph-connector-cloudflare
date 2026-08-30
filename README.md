@@ -1,5 +1,9 @@
 # Aleph connector — Cloudflare
 
+> **License:** Copyright © 2026 Sifrious. All rights reserved. This is
+> publicly viewable proprietary software, not open-source software. See
+> [LICENSE.md](LICENSE.md).
+
 Read-only zone and DNS observation. This connector enumerates the zones on a Cloudflare account,
 their DNS records, and (where the token can read it) each zone's TLS mode. It emits
 provenance-bearing observation envelopes and changes nothing.

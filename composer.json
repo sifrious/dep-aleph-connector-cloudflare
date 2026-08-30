@@ -2,7 +2,7 @@
     "name": "sifrious/aleph-connector-cloudflare",
     "description": "Read-only Cloudflare zone and DNS connector for Aleph.",
     "type": "library",
-    "license": "MIT",
+    "license": "proprietary",
     "require": {
         "php": "^8.4.1",
         "sifrious/aleph": "@dev"
